@@ -2,11 +2,8 @@ package com.weatherapp.android.data.remote.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * A single match from OpenWeatherMap's Geocoding API
- * (https://api.openweathermap.org/geo/1.0/direct). Used instead of the
- * deprecated city-name lookup on the weather endpoint itself.
- */
+// one match from OpenWeatherMap's geocoding endpoint (geo/1.0/direct),
+// used instead of the deprecated city-name lookup on /weather itself
 public class GeocodingResult {
 
     @SerializedName("name") private String name;

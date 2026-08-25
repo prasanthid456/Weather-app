@@ -1,5 +1,4 @@
-// Top-level build file — plugin versions only. All actual application
-// configuration lives in app/build.gradle.kts.
+// top-level build file, just plugin versions. actual config is in app/build.gradle.kts
 plugins {
     id("com.android.application") version "8.5.2" apply false
     id("org.jetbrains.kotlin.android") version "1.9.24" apply false

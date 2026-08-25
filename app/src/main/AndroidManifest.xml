@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Coarse is all this app actually requests at runtime (city-level
-         weather doesn't need GPS-precise fixes); FINE is declared too so
-         LocationProviderImpl can opportunistically use GPS_PROVIDER if the
-         user's device/OS grants it anyway. -->
+    <!-- only requesting COARSE at runtime, city-level weather doesn't need
+         GPS precision. FINE is declared too in case the OS/device grants
+         it anyway and LocationProviderImpl can use GPS_PROVIDER -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 

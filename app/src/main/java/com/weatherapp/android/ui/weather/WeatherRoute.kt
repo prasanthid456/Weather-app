@@ -18,14 +18,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 private enum class PermissionRequestReason { InitialLaunch, ManualRequest }
 
-/**
- * Stateful entry point for the weather screen, and the one place that talks
- * to Android's permission system directly — only an Activity/Compose context
- * can show the system permission dialog, so that responsibility can't live
- * in [WeatherViewModel]. Once permission is resolved (granted or denied),
- * the *decision* of what to load with that answer is handed back to the
- * ViewModel, which is where that logic is unit tested.
- */
+// Stateful entry point for the screen - only place that touches Android's
+// permission APIs directly, since only an Activity/Compose context can show
+// the system dialog. Once we have an answer we just hand it to the
+// ViewModel and let it decide what to do.
 @Composable
 fun WeatherRoute(viewModel: WeatherViewModel = hiltViewModel()) {
     val context = LocalContext.current

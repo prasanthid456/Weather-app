@@ -11,12 +11,9 @@ private object WeatherDestinations {
     const val WEATHER = "weather"
 }
 
-/**
- * Single destination today — the brief only calls for one screen. Wiring
- * Navigation Compose in from the start means a second screen (e.g. a
- * saved-cities list) is a new `composable(...)` block here, not a rewrite
- * of how screens get hosted.
- */
+// just one destination for now, but having Navigation Compose wired up
+// means adding a second screen later (saved cities, settings, whatever) is
+// just another composable() block here instead of a rewrite
 @Composable
 fun WeatherNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = WeatherDestinations.WEATHER) {

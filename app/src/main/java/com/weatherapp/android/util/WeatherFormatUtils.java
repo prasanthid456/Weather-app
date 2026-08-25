@@ -2,25 +2,18 @@ package com.weatherapp.android.util;
 
 import java.util.Locale;
 
-/**
- * Formatting helpers shared by the Kotlin UI-mapping layer (WeatherUiMapper).
- * Deliberately plain static Java methods with no Android framework
- * dependency, so they're trivial to unit test directly and to call from
- * Kotlin as ordinary static functions.
- */
+// formatting helpers used by WeatherUiMapper (Kotlin). Plain static
+// methods, no Android dependency, so they're easy to unit test directly.
 public final class WeatherFormatUtils {
 
     private static final String ICON_BASE_URL = "https://openweathermap.org/img/wn/";
 
     private WeatherFormatUtils() {
-        // Static utility class — not instantiable.
+        // not instantiable
     }
 
-    /**
-     * OpenWeatherMap returns whichever unit was requested; the app always
-     * requests "imperial" (see OpenWeatherApiService), so this only ever
-     * needs to format whole-degree Fahrenheit.
-     */
+    // we always request imperial units (see OpenWeatherApiService) so this
+    // only ever has to deal with Fahrenheit
     public static String formatTemperature(double degreesFahrenheit) {
         return Math.round(degreesFahrenheit) + "°F";
     }

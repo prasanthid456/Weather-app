@@ -13,10 +13,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/**
- * Single place the network stack is assembled. Everything downstream
- * (WeatherRepositoryImpl) only ever sees [OpenWeatherApiService].
- */
+// Everything network-related gets assembled here. WeatherRepositoryImpl
+// only ever sees the OpenWeatherApiService interface, not this.
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -53,9 +51,8 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): OpenWeatherApiService =
         retrofit.create(OpenWeatherApiService::class.java)
 
-    // The key itself is read out of local.properties -> BuildConfig at build
-    // time (see app/build.gradle.kts) so it's never hardcoded or committed —
-    // same approach as the iOS build's Secrets.xcconfig.
+    // key comes from local.properties -> BuildConfig at build time (see
+    // app/build.gradle.kts) so it never gets hardcoded/committed
     @Provides
     @Named("openWeatherApiKey")
     fun provideApiKey(): String = BuildConfig.OWM_API_KEY

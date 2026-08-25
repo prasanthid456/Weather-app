@@ -38,10 +38,8 @@ fun WeatherCard(weather: WeatherUiModel, icon: Bitmap?, modifier: Modifier = Mod
                     modifier = Modifier.size(80.dp)
                 )
             } else {
-                // The icon is fetched separately from the weather data
-                // itself (see WeatherViewModel.present), so there's a brief
-                // window with text but no icon yet — this placeholder covers
-                // that instead of leaving a layout hole.
+                // icon loads separately from the rest of the data, so there's
+                // a brief moment with no bitmap yet - spinner instead of a gap
                 CircularProgressIndicator(modifier = Modifier.size(80.dp))
             }
 

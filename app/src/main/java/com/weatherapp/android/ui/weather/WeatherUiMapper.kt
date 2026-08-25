@@ -3,12 +3,8 @@ package com.weatherapp.android.ui.weather
 import com.weatherapp.android.data.remote.model.CurrentWeatherResponse
 import com.weatherapp.android.util.WeatherFormatUtils
 
-/**
- * Turns the raw (Java) API model into UI-ready strings via the Java
- * [WeatherFormatUtils] helpers. Keeping this here, rather than formatting
- * inline in a composable, is what lets [WeatherUiMapperTest] verify
- * formatting without touching Compose at all.
- */
+// Turns the raw API model into display-ready strings using WeatherFormatUtils.
+// Kept out of the composables so formatting can be tested without Compose.
 object WeatherUiMapper {
     fun map(response: CurrentWeatherResponse): WeatherUiModel {
         val condition = response.weather?.firstOrNull()

@@ -37,17 +37,10 @@ class WeatherViewModel @Inject constructor(
         _searchText.value = text
     }
 
-    /**
-     * Called once when the screen first appears. Unlike iOS, a ViewModel here
-     * can't pop the system permission dialog itself — only an Activity can —
-     * so [WeatherRoute] checks/requests permission and reports the result
-     * back as [hasLocationPermission]. The *decision* of what to do with
-     * that answer stays here, which is what keeps it unit-testable.
-     *
-     * Precedence, matching the iOS build for consistency: granted location
-     * wins as "the default". Otherwise fall back to the last searched city.
-     * Otherwise show the empty prompt.
-     */
+    // Called once when the screen first appears. WeatherRoute already
+    // checked/requested the permission by the time this runs - we just
+    // decide what to do with the result. Location wins if granted, else
+    // fall back to the last searched city, else show the empty prompt.
     fun onAppear(hasLocationPermission: Boolean) {
         viewModelScope.launch {
             if (hasLocationPermission) {
@@ -91,9 +84,8 @@ class WeatherViewModel @Inject constructor(
             persistenceRepository.lastSearchedCity = response.name
             present(response)
         } catch (e: Exception) {
-            // Fall back to the last searched city so the screen stays useful
-            // even when location fails (denied mid-flow, no fix indoors, an
-            // emulator with no location configured) instead of a dead end.
+            // no fix (denied mid-flow, indoors, emulator w/ no location set) -
+            // fall back to last city instead of dead-ending on an error
             val lastCity = persistenceRepository.lastSearchedCity
             if (lastCity != null) {
                 load(lastCity)

@@ -31,11 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 
-/**
- * The app's one screen, rendered from state alone (no direct ViewModel
- * reference) so it's trivially previewable/testable — [WeatherRoute] is
- * what wires it to real data.
- */
+// Stateless - takes plain values/callbacks, no ViewModel reference, so it's
+// easy to preview and doesn't need Hilt to render. WeatherRoute wires it up.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WeatherScreen(

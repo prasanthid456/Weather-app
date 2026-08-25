@@ -3,13 +3,9 @@ package com.weatherapp.android.data.remote.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-/**
- * Raw response model for OpenWeatherMap's /data/2.5/weather endpoint.
- * Written in Java (the rest of the app is Kotlin) to demonstrate Java/Kotlin
- * interop within the same module: Kotlin code (WeatherUiMapper) consumes
- * this class directly, and its getters read as ordinary Kotlin properties
- * (response.main.temp) without any wrapper.
- */
+// raw response model for /data/2.5/weather. Written in Java on purpose -
+// Kotlin (WeatherUiMapper) calls straight into this, and the getters read
+// as normal Kotlin properties (response.main.temp) with no wrapper needed
 public class CurrentWeatherResponse {
 
     @SerializedName("coord")

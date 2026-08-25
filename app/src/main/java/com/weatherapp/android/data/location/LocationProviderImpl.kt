@@ -17,15 +17,10 @@ import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeoutOrNull
 
-/**
- * Wraps the plain `android.location` APIs (rather than Play Services'
- * FusedLocationProviderClient) so the app has no Google Play Services
- * dependency for a single "get me a rough fix" request.
- *
- * Only checks/reads location here — *requesting* the runtime permission
- * itself requires an Activity and happens in WeatherRoute.kt; this class is
- * called only after that permission has already been granted.
- */
+// Using plain android.location instead of Play Services' FusedLocationProviderClient
+// so there's no Play Services dependency just for a one-shot rough location fix.
+// Doesn't request the permission itself - that has to happen in an Activity
+// (WeatherRoute), this only runs once permission is already granted.
 class LocationProviderImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : LocationProvider {
@@ -65,8 +60,7 @@ class LocationProviderImpl @Inject constructor(
 
                 continuation.invokeOnCancellation { locationManager.removeUpdates(listener) }
 
-                // Passing an explicit Looper makes this safe to call from a
-                // background dispatcher, not just the main thread.
+                // explicit Looper so this works when called off the main thread
                 locationManager.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
             }
         }

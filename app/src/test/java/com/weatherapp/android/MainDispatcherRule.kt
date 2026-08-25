@@ -9,11 +9,8 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-/**
- * Swaps Dispatchers.Main for a test dispatcher so ViewModel coroutines
- * (launched via viewModelScope, which uses Dispatchers.Main.immediate) run
- * synchronously in unit tests instead of needing a real Android Looper.
- */
+// swaps Dispatchers.Main for a test dispatcher so viewModelScope coroutines
+// run synchronously in tests instead of needing a real Looper
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainDispatcherRule(
     private val dispatcher: TestDispatcher = UnconfinedTestDispatcher()

@@ -23,9 +23,8 @@ class WeatherRepositoryImpl @Inject constructor(
             throw WeatherError.CityNotFound(null)
         }
 
-        // "City, ST" lets a user disambiguate (e.g. "Springfield, IL" vs.
-        // "Springfield, MO"). Anything else is treated as a bare city name
-        // within the US, matching the "enter a US city" scope of the brief.
+        // "City, ST" lets people disambiguate (Springfield, IL vs Springfield, MO).
+        // otherwise just treat it as a bare US city name.
         val parts = trimmed.split(",").map { it.trim() }.filter { it.isNotEmpty() }
         val cityName = parts.first()
         val stateCode = parts.getOrNull(1)
@@ -33,8 +32,8 @@ class WeatherRepositoryImpl @Inject constructor(
 
         val results = safeCall { apiService.geocodeCity(query, GEOCODE_RESULT_LIMIT, apiKey) }
 
-        // The geocoder returns 200 + an empty list for "no match" rather
-        // than a 404, so "not found" has to be checked here explicitly.
+        // geocoder returns 200 + empty list for no match, not a 404, so
+        // this has to be checked manually
         val match = results.firstOrNull() ?: throw WeatherError.CityNotFound(trimmed)
         return ResolvedLocation(match.lat, match.lon, match.name)
     }
@@ -43,8 +42,7 @@ class WeatherRepositoryImpl @Inject constructor(
         val response = try {
             block()
         } catch (e: IOException) {
-            // Covers offline/timeout/DNS failures — by far the most common
-            // real-world failure a user hits.
+            // offline / timeout / DNS - probably the most common failure in practice
             throw WeatherError.NoConnectivity
         } catch (e: WeatherError) {
             throw e

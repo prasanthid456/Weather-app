@@ -14,12 +14,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Binds every service behind its interface. Nothing outside this file (and
- * NetworkModule) ever refers to a concrete *Impl type — that's what lets
- * WeatherViewModelTest swap in hand-written fakes with zero framework
- * involvement.
- */
+// Binds each service to its interface so nothing outside this file (and
+// NetworkModule) ever references a concrete *Impl - lets tests swap in
+// fakes without dragging in Hilt/Dagger.
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {

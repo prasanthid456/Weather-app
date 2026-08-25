@@ -13,17 +13,12 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-/**
- * Two-tier cache for weather icons: an in-memory [LruCache] (fast, cleared
- * under memory pressure and gone on relaunch) backed by a small folder in
- * the app's cache directory so icons already seen don't get re-downloaded
- * every launch. Icons are tiny (a few KB, ~50 unique codes in
- * OpenWeatherMap's set) so there's no eviction policy on the disk side.
- *
- * Reuses the same OkHttpClient Retrofit is built on rather than adding an
- * image-loading library (Coil/Glide) for what's fundamentally one GET
- * request plus a bitmap decode.
- */
+// Two-tier icon cache: in-memory LruCache first, disk folder under
+// context.cacheDir behind that so icons don't get re-downloaded every
+// launch. Didn't bother with a disk eviction policy - icons are a couple KB
+// each and there's only ~50 possible condition codes total.
+// Reuses Retrofit's OkHttpClient instead of pulling in Coil/Glide for
+// what's really just one GET request and a bitmap decode.
 class WeatherIconCacheImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val okHttpClient: OkHttpClient
@@ -55,8 +50,7 @@ class WeatherIconCacheImpl @Inject constructor(
             val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 ?: throw WeatherError.Unknown
             memoryCache.put(url, bitmap)
-            // Best-effort write — if it fails (disk full, etc.) we just
-            // re-fetch next time; not worth surfacing to the user.
+            // best effort - if this fails we just re-download next time
             runCatching { diskFile.writeBytes(bytes) }
             bitmap
         }

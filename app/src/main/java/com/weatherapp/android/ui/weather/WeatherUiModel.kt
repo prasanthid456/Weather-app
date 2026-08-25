@@ -1,7 +1,6 @@
 package com.weatherapp.android.ui.weather
 
-/** UI-ready projection of CurrentWeatherResponse — formatted strings only, so the
- *  composables that render it never need to know about the raw API shape. */
+// formatted strings only - composables shouldn't need to know the raw API shape
 data class WeatherUiModel(
     val cityName: String,
     val temperature: String,

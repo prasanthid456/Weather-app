@@ -1,6 +1,6 @@
 package com.weatherapp.android.domain
 
-/** Result of resolving a typed city name to coordinates via the Geocoding API. */
+// result of resolving a typed city name to coordinates via the geocoding API
 data class ResolvedLocation(
     val latitude: Double,
     val longitude: Double,

@@ -1,10 +1,7 @@
 package com.weatherapp.android.domain
 
-/**
- * App-level error type. Every failure path in the data layer gets funneled
- * into one of these so the UI only ever has to display [userMessage] —
- * it never sees a raw [java.io.IOException] or a Retrofit HTTP code.
- */
+// every failure in the data layer gets mapped to one of these so the UI
+// only ever has to show userMessage, never a raw exception or HTTP code
 sealed class WeatherError(val userMessage: String) : Exception(userMessage) {
 
     data class CityNotFound(val city: String?) : WeatherError(

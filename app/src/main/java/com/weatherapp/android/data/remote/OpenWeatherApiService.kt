@@ -6,17 +6,10 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-/**
- * Retrofit service definition for the two OpenWeatherMap endpoints this app
- * uses. City-name search always goes through [geocodeCity] first —
- * OpenWeatherMap's docs say direct city-name lookups on /data/2.5/weather
- * are deprecated and no longer maintained.
- *
- * Returns [Response] (rather than the bare body) so [WeatherRepositoryImpl]
- * can inspect the HTTP status code and map it to a specific [WeatherError][
- * com.weatherapp.android.domain.WeatherError] instead of just a generic
- * failure.
- */
+// City search always goes through geocodeCity first since OpenWeatherMap
+// deprecated direct city-name lookups on /data/2.5/weather.
+// Returns Response<T> instead of the bare body so WeatherRepositoryImpl can
+// look at the actual HTTP status and map it to a specific WeatherError.
 interface OpenWeatherApiService {
 
     @GET("data/2.5/weather")

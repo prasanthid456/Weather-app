@@ -7,7 +7,7 @@ plugins {
     id("kotlin-kapt")
 }
 
-// API key lives outside source control — see local.properties.example.
+// API key lives outside source control, see local.properties.example
 val localProperties = Properties().apply {
     val localPropsFile = rootProject.file("local.properties")
     if (localPropsFile.exists()) {
@@ -95,15 +95,15 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // Networking — must-have per the brief
+    // Networking
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-    // Concurrency — Kotlin Coroutines (nice-to-have)
+    // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
-    // Unit tests — JUnit is must-have, Mockito is nice-to-have
+    // Unit tests
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.12.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
