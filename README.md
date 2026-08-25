@@ -55,7 +55,7 @@ More full-IDE captures (one per search result above) are in
 
 | | |
 |---|---|
-| **Language** | Kotlin + Java (interop — see [`NOTES.md`](NOTES.md#4-the-java-files-and-why-theyre-java-on-purpose)) |
+| **Language** | Kotlin + Java, with real interop between them (not just separate files) |
 | **Architecture** | MVVM, with a stateful/stateless composable split |
 | **UI** | Jetpack Compose (Material 3) + Jetpack Navigation |
 | **DI** | Hilt |
@@ -82,9 +82,11 @@ More full-IDE captures (one per search result above) are in
   Hilt and Android permissions; `WeatherScreen` is a pure function of its
   parameters. That keeps almost all the real logic sitting in one tested
   place (the `ViewModel`) instead of spread across composables.
-
-Full architecture write-up, data-flow diagram, and the reasoning behind
-every deliberate simplification: **[`NOTES.md`](NOTES.md)**.
+- **The Java files are real interop, not just separate files**: Kotlin code
+  calls straight into `CurrentWeatherResponse.java` and `WeatherFormatUtils.java`
+  with no wrapper — `response.main.temp` reads a Java getter as a Kotlin
+  property, and `WeatherFormatUtils.formatTemperature(...)` is called like an
+  ordinary Kotlin function.
 
 ## Running it
 
@@ -115,6 +117,3 @@ app/src/test/java/com/weatherapp/android/
   fakes/            Hand-written test doubles for every service interface
   ...               ViewModel, repository, and mapper tests
 ```
-
-See [`NOTES.md`](NOTES.md) for the full breakdown, the data-flow walkthrough,
-and the reasoning behind each architectural decision.
