@@ -1,23 +1,12 @@
-# Secrets — copy local.properties.example to local.properties and fill in
 local.properties
-
-# Build output
 **/build/
 *.apk
 *.aab
-
-# Gradle
 .gradle/
-
-# Android Studio / IntelliJ
 .idea/
 *.iml
 **/*.iml
 captures/
 .cxx/
-
-# Personal dev notes — not part of the public deliverable
 NOTES.md
-
-# macOS
 .DS_Store
