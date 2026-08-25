@@ -1,0 +1,12 @@
+# Copy this file to "local.properties" in this same folder (Android Studio
+# usually generates local.properties itself, with sdk.dir already filled in —
+# just add the OWM_API_KEY line to whatever it creates). local.properties is
+# gitignored; never commit your real key.
+#
+# Get a free key from https://openweathermap.org/api
+OWM_API_KEY=your_api_key_here
+
+# Android Studio sets this automatically on first sync — only needed if
+# you're invoking Gradle from the command line before ever opening the
+# project in Studio.
+# sdk.dir=/path/to/your/Android/sdk

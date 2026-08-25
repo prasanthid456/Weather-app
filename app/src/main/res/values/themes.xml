@@ -1,0 +1,6 @@
+<resources>
+    <!-- The whole UI is Compose (WeatherAppTheme in ui/theme/Theme.kt) — this
+         XML theme only needs to exist so the manifest has a valid launch
+         theme (window background, splash) before Compose takes over. -->
+    <style name="Theme.WeatherApp" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

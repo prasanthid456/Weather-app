@@ -1,0 +1,21 @@
+# Secrets — copy local.properties.example to local.properties and fill in
+# your own OpenWeatherMap API key. Never commit the real file.
+local.properties
+
+# Build output
+**/build/
+*.apk
+*.aab
+
+# Gradle
+.gradle/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+**/*.iml
+captures/
+.cxx/
+
+# macOS
+.DS_Store
