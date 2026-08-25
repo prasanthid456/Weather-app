@@ -1,5 +1,4 @@
 # Secrets — copy local.properties.example to local.properties and fill in
-# your own OpenWeatherMap API key. Never commit the real file.
 local.properties
 
 # Build output
