@@ -17,5 +17,8 @@ local.properties
 captures/
 .cxx/
 
+# Personal dev notes — not part of the public deliverable
+NOTES.md
+
 # macOS
 .DS_Store
